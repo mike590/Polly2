@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/polly');
 
 var Word = require('./app/word/word')
-
+// debugger
 require('./app/routes')(app);
 
 app.use(express.static('public'))

@@ -1,0 +1,19 @@
+{
+  "name": "polly",
+  "version": "2.0.1",
+  "description": "A Mono/Polysyllabic rhyme matcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Polly"
+  },
+  "author": "Michael Gherard",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26"
+  }
+}

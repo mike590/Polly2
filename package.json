@@ -14,7 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.4",
+    "chai": "^3.5.0",
     "express": "^4.15.2",
-    "mongodb": "^2.2.26"
+    "mocha": "^3.3.0",
+    "mongodb": "^2.2.26",
+    "mongoose": "^4.9.6"
   }
 }

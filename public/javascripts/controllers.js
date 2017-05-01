@@ -75,7 +75,7 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
         pattern += '-';
       }
     }
-    return pattern;
+    return pattern + "$";
   };
 
   $scope.closeHelp = function(index){

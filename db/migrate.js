@@ -11,14 +11,14 @@ var Word = require('../app/models/word');
 var fs = require('fs');
 var path = require('path');
 
-// Word.count();
+// Word.count(function(err, res){console.log(res)});
 
 // Create all           ----------------------------------
 // var wordList = JSON.parse(fs.readFileSync(path.join(__dirname, 'wordlist.json'), 'utf8'));
 // for(var i = 0, j = wordList.length; i<j; i++){
 // 	Word.create(wordList[i]['word'], wordList[i]['pron'], wordList[i]['exacts']);
 // }
-
+//
 // setInterval(function(){
 // 	Word.find({}, function(err, res){
 // 		console.log("Checking");

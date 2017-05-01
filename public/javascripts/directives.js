@@ -34,18 +34,18 @@ app.directive("syllableselect", function(){
     replace: true,
     templateUrl: "views/templates/syllable_select.html",
     link: function(scope, elem, attr){
-      // scope.clickSyl = function(index){
-      //   var syl = scope.rhymer.syls[index];
-      //   if(syl.disabled != true && (rhymer.usableSyls != 1 || !syl.use)){
-      //     rhymer.helpSyls = false;
-      //     // Alternate syl class and property
-      //     syl.use = !syl.use;
-      //     var syl_dom = document.getElementById("syl" + index)
-      //     new_class = syl.use ? "use" : "dont"
-      //     syl_dom.className = new_class + " hand";
-      //     rhymer.getRhymes();
-      //   }
-      // };
+      scope.clickSyl = function(index){
+        var syl = scope.syllables[index];
+        if(syl.disabled != true && (scope.usableSyllables != 1 || !syl.use)){
+          // rhymer.helpSyls = false;
+          // Alternate syl class and property
+          syl.use = !syl.use;
+          var syl_dom = document.getElementById("syl" + index)
+          new_class = syl.use ? "use" : "dont"
+          syl_dom.className = new_class + " hand";
+          scope.retrieveRhymes();
+        }
+      };
     }
   };
 });

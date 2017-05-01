@@ -29,6 +29,9 @@ module.exports = function(app, Word){
 	// Split Match
 	var split = function (req, res){
 		var syllables = req.query.syllables;
+		if(typeof syllables == "string"){
+			syllables = [syllables];
+		}
 		// arrays of rhymes will be added as values,
 		// with the key being the syllable they rhyme with
 		var rhymes = {};
@@ -38,18 +41,14 @@ module.exports = function(app, Word){
 			// to the rhymes variable
 			var dbCallback = function(err, words){
 				if(err)	throw err;
+				console.log(words.length);
 				if(words.length){
 					rhymes[syllables[i]] = words.map(function(x){return x.word;});
 				}else{
 					rhymes[syllables[i]] = ["None Found"];
 				}
 			};
-		// ^ indicates that the syllable has been deselected
-			if(syllables[i] !== "^"){
-				Word.splitRhyme(syllables[i], dbCallback);
-			}else{
-				rhymes[syllables[i]] = ["-"];
-			}
+			Word.splitRhyme(syllables[i], dbCallback);
 		}
 
 		// Since multiple async calls are being made, we have to
@@ -80,7 +79,6 @@ module.exports = function(app, Word){
   // Complete Match
 	var complete = function (req, res){
 		var pattern = req.query.pattern;
-		console.log(pattern);
 		var dbCallback = function(err, words){
 			if (err) throw err;
 			res.json({rhymes: words.map(function(x){return x.word;})});

@@ -58,7 +58,7 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
     // Retrieve split rhymes and complete rhymes with separate calls
     var pattern = $scope.compilePattern();
     $scope.RhymeService.completeRhyme(pattern, $scope.successCompleteCallback, $scope.errorCompleteCallback);
-    $scope.RhymeService.splitRhyme(pattern.split("-"), $scope.successSplitCallback, $scope.errorSplitCallback);
+    $scope.RhymeService.splitRhyme($scope.syllables.map(function(syl){return syl.truncatedPronunciation;}), $scope.successSplitCallback, $scope.errorSplitCallback);
   };
 
   $scope.compilePattern = function(){

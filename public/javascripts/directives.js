@@ -9,16 +9,13 @@ app.directive("search", ["$http", "RhymeService", function($http, RhymeService){
       // press enter on text field should send data
       document.getElementById('rhyme_input').addEventListener('keydown', function(e){
         if(e.keyCode === 13){
-          console.log("hit enter with word: " + scope.rhyme)
-          scope.RhymeService.search(scope.rhyme);
+          scope.RhymeService.search(scope.rhyme, scope.successSearchCallback, scope.errorSearchCallback);
         }
       });
 
       // clicking on text box should highlight all the text
       scope.highlight = function(){
         document.getElementById('rhyme_input').select();
-        0
-        scope.RhymeService.splitMatch("a")
       }
 
       scope.refreshHelp = function(){

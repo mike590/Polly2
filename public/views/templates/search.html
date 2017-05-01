@@ -14,21 +14,21 @@
   <div class="row">
     <div class="col-xs-9">
       <div class="input-group col-xs-8 col-xs-offset-2">
-        <input  type="text" class="form-control input-lg" placeholder="Type a Rhyme" ng-model="rhyme" ng-click= 'highlight()' id='rhyme_input' autofocus>
-        <span class="input-group-addon hand" ng-click="RhymeService.search(rhyme)" id="break_syllables">Rhyme</span>
+        <input  type="text" class="form-control input-lg" placeholder="Type a Rhyme" ng-model="rhyme" ng-click= 'highlight()' ng-init='RhymeService.search(rhyme, successSearchCallback, errorSearchCallback);' id='rhyme_input' autofocus>
+        <span class="input-group-addon hand" ng-click="RhymeService.search(rhyme, successSearchCallback, errorSearchCallback)" id="break_syllables">Rhyme</span>
       </div>
       <div id='vert_pad_5'></div>
-      <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 help"ng-show="RhymeService.helpProns && RhymeService.pronunciations.length > 2">When there are multiple pronunciations of a word, the list of pronunciations is given below. Click a different pronunciation to see its rhymes.<span class="help_close" ng-click="RhymeService.closeHelp(0)">Close</span></div>
-      </div>
-      <div id='vert_pad_5' ng-show="RhymeService.helpProns && RhymeService.pronunciations.length > 2"></div>
-      <!-- check if prononciation is greater than 2, cause the first will always be the label "Pronunciations" -->
-      <div ng-show='RhymeService.pronunciations.length > 2' class='col-xs-12'>
+      <!-- <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 help"ng-show="RhymeService.helpProns && pronunciations.length > 2">When there are multiple pronunciations of a word, the list of pronunciations is given below. Click a different pronunciation to see its rhymes.<span class="help_close" ng-click="RhymeService.closeHelp(0)">Close</span></div>
+      </div> -->
+      <!-- <div id='vert_pad_5' ng-show="RhymeService.helpProns && pronunciations.length > 2"></div> -->
+      <div class='col-xs-12'>
         <ul id='pron_list'>
-          <li ng-repeat='pron in RhymeService.pronunciations' ng-click='RhymeService.clickPron(pron, $index)' class="pronunciation hand">{{ pron.text }}</li>
+          <li class="pronunciation hand">Pronunciations:</li>
+          <li ng-repeat='pronunciation in pronunciations' ng-click='RhymeService.clickPron(pronunciation, $index)' class="pronunciation hand">{{ pronunciation.text }}</li>
         </ul>
       </div>
-      <div id='vert_pad_5' ng-show="RhymeService.pronunciations.length > 2"></div>
+      <div id='vert_pad_5' ng-show="pronunciations.length > 2"></div>
     </div>
     <div class="col-xs-2 help hand" ng-click="refreshHelp()">Click here for guidance</div>
   </div>

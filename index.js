@@ -15,37 +15,9 @@ mongoose.connection.on('connected', function () {
 
 var Word = require('./app/models/word');
 
-makeANewOne = function(word, arr) {
-	new Word({word: word, pronunciation: arr, truncated_pronunciation: arr}).save();
-}
-
-deleteEmAll = function() {
-	Word.find({}, function(err, words){
-	 	if (err) throw err;
-	 	for(var i = 0, j = words.length; i<j; i++){
-	 		var temp = words[i].word
-			words[i].remove(function(err){
-				if (err) throw err;
-				console.log("Removed " + temp);
-			})
-	 	}
-	 });
-}
-
-listEm = function() {
-	 Word.find({}, function(err, words){
-	 	if (err) throw err;
-	 	console.log(words.length)
-	 	for(var i = 0, j = words.length; i<j; i++){
-	 		console.log(words[i].word);
-	 	}
-	 });
-}
-
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-debugger
 require('./app/routes')(app, Word);
 
 app.listen(3000, function () {

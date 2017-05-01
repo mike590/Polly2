@@ -172,7 +172,7 @@ li {
 
 
 
-.pronunciation {
+#pronunciation_label, .pronunciation {
   box-shadow: 3px 7px 5px black;
   background-color: #5CF3E0;
   color: #40AF0F;
@@ -184,15 +184,15 @@ li {
   display: inline;
 }
 
-#highlight {
-  background-color: #27AF0F;
-  color: #5CF3E0;
+#pronunciation_label {
+  font-family: 'soucisansregular', Helvetica, Arial;
+  font-size: 50px;
   font-weight: bold;
 }
 
-#pron_list li:first-child {
-  font-family: 'soucisansregular', Helvetica, Arial;
-  font-size: 50px;
+#highlight {
+  background-color: #27AF0F;
+  color: #5CF3E0;
   font-weight: bold;
 }
 

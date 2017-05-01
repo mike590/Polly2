@@ -24,8 +24,8 @@
       <!-- <div id='vert_pad_5' ng-show="RhymeService.helpProns && pronunciations.length > 2"></div> -->
       <div class='col-xs-12'>
         <ul id='pron_list'>
-          <li class="pronunciation hand">Pronunciations:</li>
-          <li ng-repeat='pronunciation in pronunciations' ng-click='RhymeService.clickPron(pronunciation, $index)' class="pronunciation hand">{{ pronunciation.text }}</li>
+          <li id="pronunciation_label" class="hand">Pronunciations:</li>
+          <li ng-repeat='pronunciation in pronunciations' ng-click='selectPronunciation(pronunciation, $index+1)' class="pronunciation hand">{{ pronunciation.text }}</li>
         </ul>
       </div>
       <div id='vert_pad_5' ng-show="pronunciations.length > 2"></div>

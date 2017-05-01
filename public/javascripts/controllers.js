@@ -3,10 +3,8 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
 	// Initialize the first rhyme
  //    $scope.rhyme = "imagination";
 	$scope.rhyme = "current";
-  // $scope.syllables = [{text: "Enter", disabled: true}, {text: "a", disabled: true}, {text: "word", disabled: true}];
   $scope.usableSyllables = 0;
   $scope.pronunciations = [];
-  $scope.selectedPronunciationIndex = 1;
   $scope.helpProns = false;
   $scope.helpSyls = false;
   $scope.helpWholeMatch = false;
@@ -17,31 +15,37 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
     $scope.RhymeService[helps[index]] = false;
   };
 
-  $scope.clickPron = function(pron, index){
-    if(pron.exact){
-      $scope.RhymeService.selectedPronunciationIndex = index;
-      $scope.RhymeService.helpProns = false;
-      $scope.RhymeService.selectPronunciation(pron);
-    }
-  };
 
-  $scope.highlightPron = function(){
+  $scope.highlightPronunciation = function(index){
     var prons = document.querySelectorAll("#pron_list li");
-    for(i = 0; i < prons.length; ++i){
-      prons[i].id = "";
+    // only highlight if there are pronunciations to highlight
+    if(prons.length > 1){
+      // highlight by class,so remove that class from all, then add to the right one
+      for(i = 0; i < prons.length; ++i){
+        // The first element is the label, don't mess with its id
+        if(i != 0){
+          prons[i].id = "";
+        }
+      }
+      prons[index].id = "highlight";
     }
-    prons[$scope.RhymeService.selectedPronunciationIndex].id = "highlight";
   };
 
-  $scope.selectPronunciation = function(pron){
+  $scope.selectPronunciation = function(pron, index){
     // empty syllables
     $scope.syllables = [];
     var truncatedPronunciations;
     var syls = pron.text.split("-");
     if(pron.truncatedPronunciation){
+      $scope.helpProns = false;
       truncatedPronunciations = pron.truncatedPronunciation.split("-");
       syls.forEach(function(el, ind, arr){
-        syls.push({text: el, truncatedPronunciation: truncatedPronunciations[ind], use: true});
+        $scope.syllables.push({text: el, truncatedPronunciation: truncatedPronunciations[ind], use: true});
+      });
+      // postDigest waits for angular to apply all changes
+      // cant highlight the pron until angular creates the elements
+      $scope.$$postDigest(function () {
+        $scope.highlightPronunciation(index);
       });
       // $scope.RhymeService.getRhymes();
     } else {
@@ -72,8 +76,7 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
 
   $scope.successSearchCallback = function(data, responseHeaders, status, statusText){
     $scope.pronunciations = data.pronunciations;
-    $scope.selectedPronunciationIndex = 1;
-    $scope.selectPronunciation(data.pronunciations[0]);
+    $scope.selectPronunciation(data.pronunciations[0], 1);
 	};
 
 	$scope.errorSearchCallback = function(data, responseHeaders, status, statusText){

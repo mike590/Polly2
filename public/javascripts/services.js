@@ -26,7 +26,7 @@ app.factory('RhymeService', ['$resource', '$http', function($resource, $http){
     //     });
     //     rhymer.cMRhymes = data.completeMatch;
     //     rhymer.splitRhymes = data.splitMatch;
-    //     rhymer.highlightPron();
+        // rhymer.highlightPron();
     //   }).
     //   error(function(data) {});
     // }

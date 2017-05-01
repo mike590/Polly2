@@ -10,11 +10,6 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
   $scope.helpWholeMatch = false;
   $scope.helpSplitMatch = false;
 
-  $scope.closeHelp = function(index){
-    var helps = ["helpProns", "helpSyls", "helpWholeMatch", "helpSplitMatch"];
-    $scope.RhymeService[helps[index]] = false;
-  };
-
 
   $scope.highlightPronunciation = function(index){
     var prons = document.querySelectorAll("#pron_list li");
@@ -39,16 +34,18 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
     if(pron.truncatedPronunciation){
       $scope.helpProns = false;
       truncatedPronunciations = pron.truncatedPronunciation.split("-");
+      $scope.usableSyllables = syls.length;
       syls.forEach(function(el, ind, arr){
         $scope.syllables.push({text: el, truncatedPronunciation: truncatedPronunciations[ind], use: true});
       });
       // postDigest waits for angular to apply all changes
-      // cant highlight the pron until angular creates the elements
+      // cant highlight the pronunciation until angular creates the elements
       $scope.$$postDigest(function () {
         $scope.highlightPronunciation(index);
       });
-      // $scope.RhymeService.getRhymes();
+      $scope.retrieveRhymes();
     } else {
+      // Couldn't find word
       $scope.usableSyllables = 0;
       $scope.syllables.push(pron);
       $scope.completeRhymes = [pron.text];
@@ -56,28 +53,45 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
     }
   };
 
+  $scope.retrieveRhymes = function(){
+    // Retrieve split rhymes and complete rhymes with separate calls
+    var pattern = $scope.compilePattern();
+    $scope.RhymeService.splitRhyme(pattern.split("-"), $scope.successSplitCallback, $scope.errorSplitCallback);
+  };
+
   $scope.compilePattern = function(){
     pattern = '';
-    $scope.RhymeService.syls.forEach(function(el, ind, arr){
-      if(el.use){
-        pattern += el.exact;
-      } else {
+    for(var i=0, j=$scope.syllables.length; i<j; i++){
+      if($scope.syllables[i].use){
+        pattern += $scope.syllables[i].truncatedPronunciation;
+      }else {
         pattern += '^';
       }
-      if(ind != $scope.RhymeService.syls.length - 1){
+      if(i != j-1){
         pattern += '-';
       }
-    });
+    }
     return pattern;
   };
 
-	$scope.completeRhymes = [];
-  $scope.splitRhymes = [];
+  $scope.closeHelp = function(index){
+    var helps = ["helpProns", "helpSyls", "helpWholeMatch", "helpSplitMatch"];
+    $scope.RhymeService[helps[index]] = false;
+  };
+
+  $scope.successSplitCallback = function(data, responseHeaders, status, statusText){
+    debugger
+  };
+
+  $scope.errorSplitCallback = function(data, responseHeaders, status, statusText){
+    debugger
+  };
 
   $scope.successSearchCallback = function(data, responseHeaders, status, statusText){
     $scope.pronunciations = data.pronunciations;
     $scope.selectPronunciation(data.pronunciations[0], 1);
-	};
+  };
+
 
 	$scope.errorSearchCallback = function(data, responseHeaders, status, statusText){
     console.log("Search errored out");

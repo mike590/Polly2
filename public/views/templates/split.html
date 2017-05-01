@@ -1,0 +1,22 @@
+<div id='split_match' class='col-xs-10 col-xs-offset-1'>
+  <div class="row">
+    <h3 class="match_title col-xs-4">Split Rhymes</h3>
+    <!-- <div class="col-xs-7 help"  ng-show="rhymer.helpSplitMatch && rhymer.usableSyllables > 0" >For each syllable you have selected, Split Rhymes provides a list of single syllable words that rhyme with it. <span ng-click="rhymer.closeHelp(3)" class="help_close">Close</span>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-xs-{{[4, 3, 1, 2, 1][usableSyllables - 1]}}"></div>
+    <ul id="top_syls">
+      <!-- <li class="{{{true: 'col-xs-3', false: 'col-xs-2'}[usableSyllables === 2]}} {{{true: 'col-xs-offset-1'}[usableSyllables === 1 || usableSyllables === 3]}}" ng-repeat="syl in syllables" ng-show="syl.use">{{ syl.text }}</li> -->
+      <li class="{{usableSyllables === 2 ? 'col-xs-3' : 'col-xs-2'}} {{(usableSyllables === 1 || usableSyllables === 3) ? 'col-xs-offset-1' : null}}" ng-repeat="syl in syllables" ng-show="syl.use">{{ syl.text }}</li>
+    </ul>
+    <ul>
+      <li class="{{{true: 'col-xs-3', false: 'col-xs-2'}[usableSyllables === 2]}} {{{true: 'col-xs-offset-1'}[usableSyllables === 1 || usableSyllables === 3]}}" ng-repeat="rhymeArr in splitRhymes">
+        <span ng-hide="rhymeArr != false">Word Not Found</span>
+        <ul ng-hide="rhymeArr === false">
+          <li class="split_singles {{['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'][usableSyllables]}}_split" ng-repeat='rhyme in rhymeArr'>{{ rhyme }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

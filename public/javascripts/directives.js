@@ -16,17 +16,14 @@ app.directive("search", function(){
         document.getElementById('rhyme_input').select();
       };
 
-      scope.refreshHelp = function(){
-        scope.RhymeService.helpProns = true;
-        scope.RhymeService.helpSyls = true;
-        scope.RhymeService.helpWholeMatch = true;
-        scope.RhymeService.helpSplitMatch = true;
-        scope.rhyme = "guidance";
-        scope.RhymeService.getProns(scope.rhyme);
-      };
-
-      // scope.RhymeService.getPronunciations(scope.rhyme);
-
+      // scope.refreshHelp = function(){
+      //   scope.RhymeService.helpProns = true;
+      //   scope.RhymeService.helpSyls = true;
+      //   scope.RhymeService.helpWholeMatch = true;
+      //   scope.RhymeService.helpSplitMatch = true;
+      //   scope.rhyme = "guidance";
+      //   scope.RhymeService.getProns(scope.rhyme);
+      // };
     }
   };
 });
@@ -50,7 +47,6 @@ app.directive("syllableselect", function(){
       //     rhymer.getRhymes();
       //   }
       // };
-      0
     }
   };
 });
@@ -66,12 +62,13 @@ app.directive("syllableselect", function(){
 //   }
 // }]);
 
-// app.directive("splitmatch", ['rhymer', function(rhymer){
-//   return{
-//     restrict: "A",
-//     replace: true,
-//     templateUrl: "splitmatch.html",
-//     link: function(scope, elem, ettr){
-//       scope.rhymer = rhymer;
-//     }
-//   }
+app.directive("split", function(){
+  return{
+    restrict: "A",
+    replace: true,
+    templateUrl: "views/templates/split.html",
+    link: function(scope, elem, ettr){
+      console.log("split")
+    }
+  }
+});

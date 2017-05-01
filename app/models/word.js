@@ -1,19 +1,27 @@
-// var mongoose = require('mongoose');
-// var Schema = mongoose.Schema;
-
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	ObjectId = Schema.ObjectId;
 
 var WordSchema = Schema({
   word: String,
-  // both of these should be arrays, and they save that way
-  // setting them to array types cause them to be unsetable for some reason
-  pronunciations: Object,
-  truncated_pronunciations: Object
+  pronunciations: [],
+  truncated_pronunciations: []
 });
 
 // Class level methods
+WordSchema.statics.splitRhyme = function(syllable, callback) {
+	this.find({truncated_pronunciations: syllable}, callback);
+};
+
+// WordSchema.statics.count = function() {
+// 	this.find({}, function(err, words){
+// 		if(err){
+// 			throw err;
+// 		}
+// 		console.log(words.length);
+// 	});
+// }
+
 WordSchema.statics.create = function(word, pronunciations, truncated_pronunciations) {
 	temp = new this({word: word, pronunciations: pronunciations, truncated_pronunciations: truncated_pronunciations});
 	temp.save(function(err){

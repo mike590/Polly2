@@ -11,6 +11,8 @@ var Word = require('../app/models/word');
 var fs = require('fs');
 var path = require('path');
 
+// Word.count();
+
 // Create all           ----------------------------------
 // var wordList = JSON.parse(fs.readFileSync(path.join(__dirname, 'wordlist.json'), 'utf8'));
 // for(var i = 0, j = wordList.length; i<j; i++){
@@ -20,8 +22,11 @@ var path = require('path');
 // setInterval(function(){
 // 	Word.find({}, function(err, res){
 // 		console.log("Checking");
-// 		if(res.length == 5750){
+// 		if(res.length === 5750){
+// 			Word.findOne({word:"current"}, function(err,word){
+// 			console.log(word.pronunciations);
 // 			process.exit();
+// 			});
 // 		}else{
 // 			console.log(res.length + " saved so far");
 // 			console.log(5750 - res.length + " to go");
@@ -36,7 +41,7 @@ var path = require('path');
 // setInterval(function(){
 // 	Word.find({}, function(err, res){
 // 		console.log("Checking");
-// 		if(res.length == 0){
+// 		if(res.length === 0){
 // 			process.exit();
 // 		}else{
 // 			console.log(res.length + " left");

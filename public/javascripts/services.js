@@ -1,13 +1,13 @@
-app.factory('RhymeService', ['$resource', '$http', function($resource, $http){
-  var rhymer = {
+app.factory('RhymeService', ['$resource', function($resource){
+  var RhymeService = {
 
     // completeMatch: function(id, success, error){
     //   @service = $resource('/api/campaigns/:id', {id: '@id'}, {'update': {method: 'PUT'}})
     //   @service.get({id: id}, success, error)
     // }
 
-    splitMatch: function(pattern, success, error){
-      $resource('/split').get({pattern: pattern}, success, error);
+    splitRhyme: function(syllables, success, error){
+      $resource('/split').get({syllables: syllables}, success, error);
     },
 
     search: function(word, success, error){
@@ -32,5 +32,5 @@ app.factory('RhymeService', ['$resource', '$http', function($resource, $http){
     // }
 
   };
-  return rhymer;
+  return RhymeService;
 }]);

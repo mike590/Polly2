@@ -28,8 +28,8 @@
           <li ng-repeat='pronunciation in pronunciations' ng-click='selectPronunciation(pronunciation, $index+1)' class="pronunciation hand">{{ pronunciation.text }}</li>
         </ul>
       </div>
-      <div id='vert_pad_5' ng-show="pronunciations.length > 2"></div>
+      <div id='vert_pad_5'></div>
     </div>
-    <div class="col-xs-2 help hand" ng-click="refreshHelp()">Click here for guidance</div>
+    <!-- <div class="col-xs-2 help hand" ng-click="refreshHelp()">Click here for guidance</div> -->
   </div>
 </div>

@@ -41,7 +41,6 @@ module.exports = function(app, Word){
 			// to the rhymes variable
 			var dbCallback = function(err, words){
 				if(err)	throw err;
-				console.log(words.length);
 				if(words.length){
 					rhymes[syllables[i]] = words.map(function(x){return x.word;});
 				}else{

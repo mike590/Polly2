@@ -17,15 +17,6 @@ WordSchema.statics.completeRhyme = function(pattern, callback) {
 	this.find({truncated_pronunciations: {$in: [new RegExp(pattern)]}}, callback);
 };
 
-// WordSchema.statics.count = function() {
-// 	this.find({}, function(err, words){
-// 		if(err){
-// 			throw err;
-// 		}
-// 		console.log(words.length);
-// 	});
-// }
-
 WordSchema.statics.create = function(word, pronunciations, truncated_pronunciations) {
 	temp = new this({word: word, pronunciations: pronunciations, truncated_pronunciations: truncated_pronunciations});
 	temp.save(function(err){

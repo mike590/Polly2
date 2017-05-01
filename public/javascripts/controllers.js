@@ -3,6 +3,7 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
 	// Initialize the first rhyme
  //    $scope.rhyme = "imagination";
 	$scope.rhyme = "current";
+  $scope.splitRhymes = {};
   $scope.usableSyllables = 0;
   $scope.pronunciations = [];
   $scope.helpProns = false;
@@ -80,7 +81,7 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
   };
 
   $scope.successSplitCallback = function(data, responseHeaders, status, statusText){
-    debugger
+    $scope.splitRhymes = data.rhymes;
   };
 
   $scope.errorSplitCallback = function(data, responseHeaders, status, statusText){
@@ -98,8 +99,10 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
     debugger
 	};
 
-	// window.test = function (pat){
-	// 	RhymeService.splitMatch(pat, $scope.successCallback, $scope.errorCallback);
-	// };
+	$scope.tester = function (x){
+    $scope
+    x
+    debugger
+	};
 
 }]);

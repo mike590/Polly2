@@ -54,8 +54,10 @@ module.exports = function(app, Word){
   var int = setInterval(checkIfFinished, 1000);
   // Only wait 10 seconds
   var clearInt = function(){
-		clearInterval(int);
-		res.json({rhymes: rhymes});
+  	if(int._repeat){
+			clearInterval(int);
+			res.json({rhymes: rhymes});
+		}
   };
   setTimeout(clearInt, 10000);
 	}

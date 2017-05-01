@@ -34,7 +34,6 @@ app.directive("syllableselect", function(){
     replace: true,
     templateUrl: "views/templates/syllable_select.html",
     link: function(scope, elem, attr){
-      console.log("syl select");
       // scope.clickSyl = function(index){
       //   var syl = scope.rhymer.syls[index];
       //   if(syl.disabled != true && (rhymer.usableSyls != 1 || !syl.use)){
@@ -68,7 +67,6 @@ app.directive("split", function(){
     replace: true,
     templateUrl: "views/templates/split.html",
     link: function(scope, elem, ettr){
-      console.log("split")
     }
   }
 });

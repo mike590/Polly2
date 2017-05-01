@@ -13,6 +13,10 @@ WordSchema.statics.splitRhyme = function(syllable, callback) {
 	this.find({truncated_pronunciations: syllable}, callback);
 };
 
+WordSchema.statics.completeRhyme = function(pattern, callback) {
+	this.find({truncated_pronunciations: {$in: [new RegExp(pattern)]}}, callback);
+};
+
 // WordSchema.statics.count = function() {
 // 	this.find({}, function(err, words){
 // 		if(err){

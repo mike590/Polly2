@@ -50,16 +50,15 @@ app.directive("syllableselect", function(){
   };
 });
 
-// app.directive("completematch", ['rhymer', function(rhymer){
-//   return{
-//     restrict: "A",
-//     replace: true,
-//     templateUrl: "completematch.html",
-//     link: function(scope, elem, ettr){
-//       scope.rhymer = rhymer;
-//     }
-//   }
-// }]);
+app.directive("complete", function(){
+  return{
+    restrict: "A",
+    replace: true,
+    templateUrl: "views/templates/complete.html",
+    link: function(scope, elem, ettr){
+    }
+  }
+});
 
 app.directive("split", function(){
   return{

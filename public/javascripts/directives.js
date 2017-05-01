@@ -1,11 +1,9 @@
-app.directive("search", ["$http", "RhymeService", function($http, RhymeService){
+app.directive("search", function(){
   return {
     restrict: "A",
     replace: true,
     templateUrl: "views/templates/search.html",
     link: function(scope, elem, attr){
-      scope.RhymeService = RhymeService;
-
       // press enter on text field should send data
       document.getElementById('rhyme_input').addEventListener('keydown', function(e){
         if(e.keyCode === 13){
@@ -16,7 +14,7 @@ app.directive("search", ["$http", "RhymeService", function($http, RhymeService){
       // clicking on text box should highlight all the text
       scope.highlight = function(){
         document.getElementById('rhyme_input').select();
-      }
+      };
 
       scope.refreshHelp = function(){
         scope.RhymeService.helpProns = true;
@@ -30,34 +28,32 @@ app.directive("search", ["$http", "RhymeService", function($http, RhymeService){
       // scope.RhymeService.getPronunciations(scope.rhyme);
 
     }
-  }
-}]);
+  };
+});
 
-// app.directive("sylselect", ['rhymer', function(rhymer){
-//   return {
-//     restrict: "A",
-//     replace: true,
-//     templateUrl: "sylselect.html",
-//     link: function(scope, elem, attr){
-
-//       scope.clickSyl = function(index){
-//         var syl = scope.rhymer.syls[index];
-//         if(syl.disabled != true && (rhymer.usableSyls != 1 || !syl.use)){
-//           rhymer.helpSyls = false;
-//           // Alternate syl class and property
-//           syl.use = !syl.use;
-//           var syl_dom = document.getElementById("syl" + index)
-//           new_class = syl.use ? "use" : "dont"
-//           syl_dom.className = new_class + " hand";
-//           rhymer.getRhymes();
-//         }
-//       };
-
-//       scope.rhymer = rhymer;
-
-//     }
-//   }
-// }]);
+app.directive("syllableselect", function(){
+  return {
+    restrict: "A",
+    replace: true,
+    templateUrl: "views/templates/syllable_select.html",
+    link: function(scope, elem, attr){
+      console.log("syl select");
+      // scope.clickSyl = function(index){
+      //   var syl = scope.rhymer.syls[index];
+      //   if(syl.disabled != true && (rhymer.usableSyls != 1 || !syl.use)){
+      //     rhymer.helpSyls = false;
+      //     // Alternate syl class and property
+      //     syl.use = !syl.use;
+      //     var syl_dom = document.getElementById("syl" + index)
+      //     new_class = syl.use ? "use" : "dont"
+      //     syl_dom.className = new_class + " hand";
+      //     rhymer.getRhymes();
+      //   }
+      // };
+      0
+    }
+  };
+});
 
 // app.directive("completematch", ['rhymer', function(rhymer){
 //   return{

@@ -13,13 +13,6 @@ app.factory('RhymeService', ['$resource', '$http', function($resource, $http){
     search: function(word, success, error){
       service = $resource('/search/:word', {word: "@word"});
       service.get({word: word}, success, error);
-      // $http.get(url).
-      // success(function(data) {
-      //   rhymer.pronunciations = data.list;
-      //   rhymer.selectedPronIndex = 1;
-      //   rhymer.selectPron(data.list[1]);
-      // }).
-      // error(function(data) {});
     }
 
     // getRhymes: function(index){

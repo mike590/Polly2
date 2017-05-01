@@ -1,10 +1,9 @@
 app.factory('RhymeService', ['$resource', function($resource){
   var RhymeService = {
 
-    // completeMatch: function(id, success, error){
-    //   @service = $resource('/api/campaigns/:id', {id: '@id'}, {'update': {method: 'PUT'}})
-    //   @service.get({id: id}, success, error)
-    // }
+    completeRhyme: function(pattern, success, error){
+      $resource('/complete').get({pattern: pattern}, success, error);
+    },
 
     splitRhyme: function(syllables, success, error){
       $resource('/split').get({syllables: syllables}, success, error);

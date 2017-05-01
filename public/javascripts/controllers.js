@@ -57,7 +57,8 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
   $scope.retrieveRhymes = function(){
     // Retrieve split rhymes and complete rhymes with separate calls
     var pattern = $scope.compilePattern();
-    $scope.RhymeService.splitRhyme(pattern.split("-"), $scope.successSplitCallback, $scope.errorSplitCallback);
+    $scope.RhymeService.completeRhyme(pattern, $scope.successCompleteCallback, $scope.errorCompleteCallback);
+    $scope.RhymeService.splitRhyme($scope.syllables.map(function(syl){return syl.truncatedPronunciation;}), $scope.successSplitCallback, $scope.errorSplitCallback);
   };
 
   $scope.compilePattern = function(){
@@ -66,7 +67,9 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
       if($scope.syllables[i].use){
         pattern += $scope.syllables[i].truncatedPronunciation;
       }else {
-        pattern += '^';
+        // if the syllable isn't used, insert the regex to skip it
+        // [^-]+ will skip to the next hyphen/syllable
+        pattern += '[^-]+';
       }
       if(i != j-1){
         pattern += '-';
@@ -78,6 +81,15 @@ app.controller("rhymeCtlr", ['$scope', 'RhymeService', function($scope, RhymeSer
   $scope.closeHelp = function(index){
     var helps = ["helpProns", "helpSyls", "helpWholeMatch", "helpSplitMatch"];
     $scope.RhymeService[helps[index]] = false;
+  };
+
+
+  $scope.successCompleteCallback = function(data, responseHeaders, status, statusText){
+    $scope.completeRhymes = data.rhymes;
+  };
+
+  $scope.errorCompleteCallback = function(data, responseHeaders, status, statusText){
+    debugger
   };
 
   $scope.successSplitCallback = function(data, responseHeaders, status, statusText){

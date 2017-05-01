@@ -1,9 +1,9 @@
 <div class='col-xs-12'>
   <div id='syl_select' class='col-xs-10 col-xs-offset-1'>
     <div class="row">
-      <div class="col-xs-5 help" id="sylHelp" ng-show="helpSyls && usableSyls > 1 && usableSyls < 5">Click on a syllable to the right to select it or deselect it. Syllables in green will be rhymed, while syllables in red will be ignored.<span class="help_close" ng-click="closeHelp(1)">Close</span></div>
+      <!-- <div class="col-xs-5 help" id="sylHelp" ng-show="helpSyls && usableSyls > 1 && usableSyls < 5">Click on a syllable to the right to select it or deselect it. Syllables in green will be rhymed, while syllables in red will be ignored.<span class="help_close" ng-click="closeHelp(1)">Close</span></div> -->
       <ul>
-        <li ng-repeat='syllable in syllables track by $index' ng-click="clickSyl($index)" id='syl{{$index}}' class='use hand'>{{ syllable.text }}</li>
+        <li ng-repeat='syllable in syllables' ng-click="clickSyl($index)" id='syl{{$index}}' class='use hand'>{{ syllable.text }}</li>
       </ul>
     </div>
   </div>
